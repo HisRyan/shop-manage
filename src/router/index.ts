@@ -14,6 +14,18 @@ const routes: Array<RouteRecordRaw> = [
     path: '/register',
     name : 'register',
     component: () => import('../views/signup/register.vue')
+  },
+  {
+    path: '/home',
+    name: 'home',
+    component: () => import('../views/home/index.vue'),
+    children:[
+      {
+        path: '/home/edit',
+        name: 'edit',
+        component: () => import('../views/edit/index.vue')
+      }
+    ]
   }
  
 ]
@@ -21,6 +33,10 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+     next()
 })
 
 export default router
