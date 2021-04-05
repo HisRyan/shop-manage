@@ -24,7 +24,17 @@ const routes: Array<RouteRecordRaw> = [
         path: '/home/edit',
         name: 'edit',
         component: () => import('../views/edit/index.vue')
-      }
+      },
+      {
+        path: '/home/form', 
+        name: 'form',
+        component: () => import('../views/form/index.vue')
+      },
+      {
+        path: '/home/upload', 
+        name: 'upload',
+        component: () => import('../views/upload/index.vue')
+      },
     ]
   }
  

@@ -29,7 +29,7 @@ const MenuSider = defineComponent({
         icon: 'ContainerOutlined',
         children: [
           {
-            key: 1.1,
+            key: 'form',
             title: '自定义表单',
             icon: 'ProjectOutlined',
           }
@@ -46,7 +46,7 @@ const MenuSider = defineComponent({
         icon: 'CloudUploadOutlined',
         children: [
           {
-            key: 3.1,
+            key: 'upload',
             title: "上传图片",
             icon :'UploadOutlined' ,
           },
