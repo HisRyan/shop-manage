@@ -1,9 +1,10 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { useRouter} from "vue-router";
-import { Layout, Menu, Dropdown } from "ant-design-vue";
+import { useRouter } from "vue-router";
+import { Layout, Menu, Dropdown} from "ant-design-vue";
 import MenuSlier from "../../components/MenuSider.vue";
-import { DownOutlined, } from '@ant-design/icons-vue';
+import { DownOutlined } from "@ant-design/icons-vue";
+import Breadcrumb from "../crumbs/index.vue"
 const LayoutContent = Layout.Content;
 const LayoutHeader = Layout.Header;
 const LayoutFooter = Layout.Footer;
@@ -19,22 +20,22 @@ const home = defineComponent({
     MenuSlier,
     DownOutlined,
     Dropdown,
-    'a-dropdown':Dropdown,
-    'a-menu':Menu,
-    'a-menu-item':Menu.Item
-
+    "a-dropdown": Dropdown,
+    "a-menu": Menu,
+    "a-menu-item": Menu.Item,
+    Breadcrumb
   },
   setup() {
     const router = useRouter();
     const exitLogin = () => {
       router.push({
-        name: 'signup'
-      })
-    }
+        name: "signup",
+      });
+    };
     return {
       selectedKeys: ref<string[]>(["1"]),
       collapsed: ref<boolean>(false),
-      exitLogin
+      exitLogin,
     };
   },
 });
@@ -53,7 +54,6 @@ export default home;
         color: 'white',
         paddingTop: '70px',
         background: 'rgb(255,255,255)',
-       
       }"
       v-model:collapsed="collapsed"
       :trigger="null"
@@ -69,12 +69,12 @@ export default home;
           width: '100%',
           height: '70px',
           color: 'white',
-          display:'flex',
-          flexDirection: 'row-reverse'
+          display: 'flex',
+          flexDirection: 'row-reverse',
         }"
-      > 
-        <a-dropdown >
-          <a class="ant-dropdown-link" @click.prevent style="height:40px">
+      >
+        <a-dropdown>
+          <a class="ant-dropdown-link" @click.prevent style="height: 40px">
             Hover me
             <DownOutlined />
           </a>
@@ -94,11 +94,13 @@ export default home;
         :style="{
           margin: '24px 16px 0',
           overflow: 'initial',
-          padding: '80px 0px 80px 200px',
-          textAlign: 'center',
+          padding: '50px 0px 80px 200px',
         }"
       >
-        <router-view />
+        <div style="margin: 16px 20px; font-size: 15px">
+          <Breadcrumb/>
+        </div>
+        
       </layout-content>
       <layout-footer :style="{ textAlign: 'center' }">@李小杰</layout-footer>
     </layout>
