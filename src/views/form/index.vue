@@ -1,7 +1,7 @@
 <script lang='ts'>
 import { defineComponent } from 'vue'
 
-const index = defineComponent({ 
+const form = defineComponent({ 
    setup() { 
 
      return{  
@@ -10,13 +10,13 @@ const index = defineComponent({
 
 })
 
-export default index
+export default form
 
 </script>
 
 <template>
    <div>
-     123
+     自定义表单
    </div>
 </template>
 

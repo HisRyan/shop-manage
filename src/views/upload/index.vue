@@ -1,25 +1,23 @@
 <script lang='ts'>
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
+import { Empty } from "ant-design-vue";
+const upload = defineComponent({
+  components: {
+    "a-empty":Empty
+  },
+  setup() {
+    return {};
+  },
+});
 
-const index = defineComponent({ 
-   setup() { 
-
-     return{  
-      }
- }
-
-})
-
-export default index
-
+export default upload;
 </script>
 
 <template>
-   <div>
-     上传文件
-   </div>
+  <div>
+      <a-empty />
+  </div>
 </template>
 
-<style scoped>
-
+<style  lang=scss scoped>
 </style>
