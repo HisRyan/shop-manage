@@ -1,8 +1,15 @@
 <script lang="ts">
-import { defineComponent, ref, VNodeChild} from "vue";
+import { defineComponent, ref, VNodeChild } from "vue";
 import { Menu } from "ant-design-vue";
 import { useRouter } from "vue-router";
-import { EditOutlined, ContainerOutlined, ProjectOutlined, CloudUploadOutlined, UploadOutlined } from '@ant-design/icons-vue';
+import {
+  EditOutlined,
+  ContainerOutlined,
+  ProjectOutlined,
+  CloudUploadOutlined,
+  UploadOutlined,
+  FormOutlined
+} from "@ant-design/icons-vue";
 interface itemEvent {
   key: string;
   keyPath: string[];
@@ -18,7 +25,8 @@ const MenuSider = defineComponent({
     ContainerOutlined,
     ProjectOutlined,
     CloudUploadOutlined,
-    UploadOutlined
+    UploadOutlined,
+    FormOutlined
   },
   setup() {
     const router = useRouter();
@@ -26,44 +34,51 @@ const MenuSider = defineComponent({
       {
         key: 1,
         title: "提交表单",
-        icon: 'ContainerOutlined',
+        icon: "ContainerOutlined",
         children: [
           {
-            key: 'form',
-            title: '自定义表单',
-            icon: 'ProjectOutlined',
+            key: "form",
+            title: "自定义表单",
+            icon: "ProjectOutlined",
+          },
+        ],
+      },
+      {
+        key: "2",
+        title: "富文本",
+        icon: "EditOutlined",
+        children: [
+          {  
+              key: "edit",
+              title:"富文本编辑器",
+              icon:'FormOutlined'
           }
         ]
       },
       {
-        key: 'edit',
-        title: "富文本",
-            icon: 'EditOutlined',
-      },
-      {
         key: 3,
         title: "上传文件",
-        icon: 'CloudUploadOutlined',
+        icon: "CloudUploadOutlined",
         children: [
           {
-            key: 'upload',
+            key: "upload",
             title: "上传图片",
-            icon :'UploadOutlined' ,
+            icon: "UploadOutlined",
           },
         ],
       },
     ];
     const toMenu = (e: itemEvent) => {
-        console.log(e.key);
-        router.push({
-          name:e.key
-        })
-    }
+      console.log(e.key);
+      router.push({
+        name: e.key,
+      });
+    };
 
     return {
       selectedKeys: ref<string[]>(["1"]),
       menuList,
-      toMenu
+      toMenu,
     };
   },
 });
@@ -73,25 +88,30 @@ export default MenuSider;
 
 <template>
   <div>
-    <a-menu theme="light" mode="inline" v-model:selectedKeys="selectedKeys" @click="toMenu">
+    <a-menu
+      theme="light"
+      mode="inline"
+      v-model:selectedKeys="selectedKeys"
+      @click="toMenu"
+    >
       <template v-for="item in menuList" :key="item.key">
         <template v-if="!item.children">
-          <a-menu-item :key="item.key" >
-             <component :is="item.icon"/>
+          <a-menu-item :key="item.key">
+            <component :is="item.icon" />
             <span>{{ item.title }}</span>
           </a-menu-item>
         </template>
         <template v-else>
           <a-sub-menu :key="item.key">
             <template #title>
-              <component :is="item.icon"/>
+              <component :is="item.icon" />
               <span>
                 <span>{{ item.title }}</span>
               </span>
             </template>
             <div v-for="item in item.children" :key="item.key">
-              <a-menu-item :key="item.key" >
-                <component :is="item.icon"/>
+              <a-menu-item :key="item.key">
+                <component :is="item.icon" />
                 <span>{{ item.title }}</span>
               </a-menu-item>
             </div>

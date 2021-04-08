@@ -18,6 +18,7 @@ const routes: Array<any> = [
   {
     path: '/home',
     name: 'home',
+    redirect: '/home/form',
     meta: {
       name: '主页',
       breadcrumb: true

@@ -3,7 +3,7 @@ import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
 import { Layout, Menu, Dropdown} from "ant-design-vue";
 import MenuSlier from "../../components/MenuSider.vue";
-import { DownOutlined } from "@ant-design/icons-vue";
+import { DownOutlined, LoginOutlined, UserOutlined } from "@ant-design/icons-vue";
 import Breadcrumb from "../crumbs/index.vue"
 const LayoutContent = Layout.Content;
 const LayoutHeader = Layout.Header;
@@ -23,7 +23,9 @@ const home = defineComponent({
     "a-dropdown": Dropdown,
     "a-menu": Menu,
     "a-menu-item": Menu.Item,
-    Breadcrumb
+    Breadcrumb,
+    LoginOutlined,
+    UserOutlined
   },
   setup() {
     const router = useRouter();
@@ -81,14 +83,19 @@ export default home;
           <template #overlay>
             <a-menu>
               <a-menu-item>
+                <UserOutlined />
                 <span>个人中心</span>
               </a-menu-item>
               <a-menu-item>
+                <LoginOutlined />
                 <span @click="exitLogin">退出登陆</span>
               </a-menu-item>
             </a-menu>
           </template>
         </a-dropdown>
+         <div>
+        <img src="@/assets/img/logo.png" alt="" style="width:40px;height:40px;margin-right:10px">
+      </div>
       </layout-header>
       <layout-content
         :style="{

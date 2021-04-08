@@ -107,6 +107,7 @@ export default crumbs;
   }
 }
 .content {
+  margin-top: 20px;
   text-align: center;
 }
 </style>
