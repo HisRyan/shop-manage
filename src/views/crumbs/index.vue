@@ -5,7 +5,7 @@ import { CloseOutlined } from "@ant-design/icons-vue";
 import { Breadcrumb, Button } from "ant-design-vue";
 import { remove } from "../../utils";
 const crumbs = defineComponent({
-  name: "crumbs",
+  name: "Crumbs",
   components: {
     "a-breadcrumb": Breadcrumb,
     "a-breadcrumb-item": Breadcrumb.Item,
@@ -29,13 +29,12 @@ const crumbs = defineComponent({
     }
     //删除面包屑
     function delbread(item: any, index: number) {
-      console.log(item);
       breadcrumbs.value = remove(breadcrumbs.value, item);
       //删除的是最后一项，跳转到前一个面包屑
       if (breadcrumbs.value[index]) {
         breadcrumbRedirect(breadcrumbs.value[index].path);
       } else {
-        breadcrumbRedirect(breadcrumbs.value[index-1].path);
+        breadcrumbRedirect(breadcrumbs.value[index - 1].path);
       }
     }
     watch(
@@ -71,9 +70,9 @@ export default crumbs;
       >
         {{ item.meta.name }}
         <span
-          @click.stop="delbread(item, index)"
-          style="margin-left: 5px"
           v-if="item.name != 'home'"
+          style="margin-left: 5px"
+          @click.stop="delbread(item, index)"
         >
           <CloseOutlined />
         </span>
@@ -81,11 +80,16 @@ export default crumbs;
     </template>
   </div>
   <div class="content">
-    <router-view />
+    <router-view v-slot="{ Component }">
+        <transition name="fade-transform" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss" >
+@import  '../../style/transtion';
 .bread {
   display: flex;
   .btn {
@@ -110,4 +114,5 @@ export default crumbs;
   margin-top: 20px;
   text-align: center;
 }
+
 </style>

@@ -2,9 +2,6 @@
 import { defineComponent} from "vue";
 import {Form} from "ant-design-vue"
 const UserForm = defineComponent({
-  props: {
-    formList: Array,
-  },
   component: {
     "a-form": Form,
     "a-form-item": Form.Item,
@@ -28,9 +25,15 @@ export default UserForm;
       :wrapper-col="wrapperCol"
       :label-col="labelCol"
     >
-      <template v-for="(item, index) of formList" :key="index">
+      <template
+        v-for="(item, index) of formList"
+        :key="index"
+      >
         <template>
-          <a-form-item :label="item.name" :name="item.name">
+          <a-form-item
+            :label="item.name"
+            :name="item.name"
+          >
             <a-input v-model:value="formState.name" />
           </a-form-item>
         </template>

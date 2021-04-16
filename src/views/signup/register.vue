@@ -12,7 +12,9 @@ export default register;
 
 <template>
   <div class="main">
-    <p class="text">注册界面</p>
+    <p class="text">
+      注册界面
+    </p>
   </div>
 </template>
 

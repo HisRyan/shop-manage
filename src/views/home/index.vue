@@ -10,7 +10,7 @@ const LayoutHeader = Layout.Header;
 const LayoutFooter = Layout.Footer;
 const LayoutSider = Layout.Sider;
 const home = defineComponent({
-  name: "home",
+  name: "Home",
   components: {
     Layout,
     LayoutContent,
@@ -48,6 +48,7 @@ export default home;
 <template>
   <layout>
     <layout-sider
+      v-model:collapsed="collapsed"
       :style="{
         overflow: 'auto',
         height: '100vh',
@@ -57,7 +58,6 @@ export default home;
         paddingTop: '70px',
         background: 'rgb(255,255,255)',
       }"
-      v-model:collapsed="collapsed"
       :trigger="null"
       collapsible
     >
@@ -76,7 +76,11 @@ export default home;
         }"
       >
         <a-dropdown>
-          <a class="ant-dropdown-link" @click.prevent style="height: 40px">
+          <a
+            class="ant-dropdown-link"
+            style="height: 40px"
+            @click.prevent
+          >
             Hover me
             <DownOutlined />
           </a>
@@ -93,9 +97,13 @@ export default home;
             </a-menu>
           </template>
         </a-dropdown>
-         <div>
-        <img src="@/assets/img/logo.png" alt="" style="width:40px;height:40px;margin-right:10px">
-      </div>
+        <div>
+          <img
+            src="@/assets/img/logo.png"
+            alt=""
+            style="width:40px;height:40px;margin-right:10px"
+          >
+        </div>
       </layout-header>
       <layout-content
         :style="{
@@ -105,11 +113,12 @@ export default home;
         }"
       >
         <div style="margin: 16px 20px; font-size: 15px">
-          <Breadcrumb/>
+          <Breadcrumb />
         </div>
-        
       </layout-content>
-      <layout-footer :style="{ textAlign: 'center' }">@李小杰</layout-footer>
+      <layout-footer :style="{ textAlign: 'center',width:'700px',margin:'auto' }">
+    
+      </layout-footer>
     </layout>
   </layout>
 </template>

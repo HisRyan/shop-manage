@@ -12,9 +12,13 @@
     "ant-design-vue": "^2.1.0",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "dayjs": "^1.10.4",
     "js-base64": "^3.6.0",
     "less": "^3.11.1",
     "less-loader": "^7.1.0",
+    "mockjs": "^1.1.0",
+    "qrcanvas": "^3.1.2",
+    "qrcodejs2": "0.0.2",
     "register-service-worker": "^1.7.1",
     "sass": "^1.29.0",
     "sass-loader": "^7.3.1",
@@ -62,7 +66,13 @@
     "rules": {
       "no-debugger": "off",
       "no-console": "off",
-      "vue/no-unused-components": "off"
+      "vue/no-unused-components": "off",
+      "eslint-disable-next-line": "off",
+      "vue/no-lone-template": "off",
+      "indent": [
+        2,
+        4
+      ]
     },
     "overrides": [
       {

@@ -15,9 +15,9 @@ export default edit
 </script>
 
 <template>
-   <div>
-     富文本编辑器
-   </div>
+  <div>
+    富文本编辑器
+  </div>
 </template>
 
 <style scoped>

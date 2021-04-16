@@ -89,12 +89,15 @@ export default MenuSider;
 <template>
   <div>
     <a-menu
+      v-model:selectedKeys="selectedKeys"
       theme="light"
       mode="inline"
-      v-model:selectedKeys="selectedKeys"
       @click="toMenu"
     >
-      <template v-for="item in menuList" :key="item.key">
+      <template
+        v-for="item in menuList"
+        :key="item.key"
+      >
         <template v-if="!item.children">
           <a-menu-item :key="item.key">
             <component :is="item.icon" />
@@ -109,10 +112,13 @@ export default MenuSider;
                 <span>{{ item.title }}</span>
               </span>
             </template>
-            <div v-for="item in item.children" :key="item.key">
-              <a-menu-item :key="item.key">
-                <component :is="item.icon" />
-                <span>{{ item.title }}</span>
+            <div
+              v-for="itemto in item.children"     
+              :key="itemto.key"
+            >
+              <a-menu-item :key="itemto.key">
+                <component :is="itemto.icon" />
+                <span>{{ itemto.title }}</span>
               </a-menu-item>
             </div>
           </a-sub-menu>
