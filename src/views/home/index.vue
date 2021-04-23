@@ -2,7 +2,7 @@
 import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
 import { Layout, Menu, Dropdown} from "ant-design-vue";
-import MenuSlier from "../../components/MenuSider.vue";
+import MenuSlier from '@/components/MenuSilder/index.vue';
 import { DownOutlined, LoginOutlined, UserOutlined } from "@ant-design/icons-vue";
 import Breadcrumb from "../crumbs/index.vue"
 const LayoutContent = Layout.Content;
@@ -30,8 +30,9 @@ const home = defineComponent({
   setup() {
     const router = useRouter();
     const exitLogin = () => {
-      router.push({
+      router.replace({
         name: "signup",
+
       });
     };
     return {
@@ -117,7 +118,7 @@ export default home;
         </div>
       </layout-content>
       <layout-footer :style="{ textAlign: 'center',width:'700px',margin:'auto' }">
-    
+
       </layout-footer>
     </layout>
   </layout>

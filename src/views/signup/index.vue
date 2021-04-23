@@ -1,14 +1,15 @@
 <script lang="ts">
 import { defineComponent, ref, UnwrapRef, reactive } from 'vue'
-import { Input, Form, Button, Spin } from 'ant-design-vue'
+import { Input, Form, Button, Spin, message } from 'ant-design-vue'
 import { useRouter } from 'vue-router'
 import { RuleObject } from 'node_modules/ant-design-vue/lib/form/interface'
-import { $base64 } from '../../utils'
-import { fetch } from '../../api'
-import { ValidateErrorEntity } from 'ant-design-vue/es/form/interface'
+import {  userLogin, applyList } from "../../api"
+import {$base64} from "@/utils";
+
+
 interface FormState {
-    name: string
-    age: number | null
+    name: string | null
+    password: string | null
 }
 const signup = defineComponent({
     components: {
@@ -24,30 +25,38 @@ const signup = defineComponent({
         const router = useRouter()
         const spinning = ref<Boolean>(false)
         const formState: UnwrapRef<FormState> = reactive({
-            name: '',
-            age: null,
+            name: null,
+            password: null,
         })
+        //登录按钮
         const submit = function() {
             formRef.value
+                //验证表单
                 .validate()
                 .then(() => {
-                    spinning.value = true
-                    setTimeout(() => {
-                        fetch(
-                            'http://rap2api.taobao.org/app/mock/279673/login/1616051665730',
-                            {
-                                id: 1,
-                            }
-                        ).then(() => {
-                            router.push({
-                                name: 'home',
-                            })
+                   spinning.value = true;
+                   const params  = {
+                     username: $base64(formState.name),
+                     password: $base64(formState.password),
+                     data :{
+                        0: new Date()
+                     }
+                   }
+                   userLogin(params)
+                    .then((res) => {
+                      localStorage.setItem("loginTk",res.data.accessToken)
+                      localStorage.setItem('menuList',JSON.stringify(res.data.menus) )
+                      localStorage.setItem("userInfo",JSON.stringify(res.data.userInfo))
+                        router.replace({
+                          name:'home'
                         })
-                    }, 1500)
+                    })
+                    .catch((error) => {
+                        message.error(error)
+                        spinning.value = false
+                    })
                 })
-                .catch((error: ValidateErrorEntity<FormState>) => {
-                    console.log(error.errorFields)
-                })
+
         }
 
         const resetForm = () => {
@@ -55,19 +64,13 @@ const signup = defineComponent({
         }
 
         const register = () => {
-            localStorage.setItem('user', '123')
-            router.push({
-                name: 'register',
-                params: {
-                    userId: 123,
-                },
-            })
+
         }
         let validateName = async (rule: RuleObject, value: string) => {
-            var r = /^\+?[1-9][0-9]*$/
-            if (!r.test(value)) {
-                return Promise.reject('账号只能输入数字')
-            }
+            // const r = /^\+?[1-9][0-9]*$/
+            // if (!r.test(value)) {
+            //     return Promise.reject('账号只能输入数字')
+            // }
             return Promise.resolve()
         }
         const rules = {
@@ -82,7 +85,7 @@ const signup = defineComponent({
                     trigger: 'blur',
                 },
             ],
-            age: [
+            password: [
                 {
                     required: true,
                     message: '请输入密码',
@@ -118,44 +121,41 @@ export default signup
 </script>
 
 <template>
-    <div style="padding-top: 100px">
-        <div class="main">
-            <a-spin size="large" tip="登陆中" :spinning="spinning">
-                <p class="text">
-                    后台登录系统
-                </p>
-                <a-form
-                    ref="formRef"
-                    :model="formState"
-                    :wrapper-col="wrapperCol"
-                    :label-col="labelCol"
-                >
-                    <a-form-item label="账号" name="name" :rules="rules.name">
-                        <a-input v-model:value="formState.name" />
-                    </a-form-item>
-                    <a-form-item label="密码" name="age">
-                        <a-input v-model:value="formState.age" />
-                    </a-form-item>
-                    <a-form-item
-                        :wrapper-col="{
-                            span: 24,
-                            offset: 4,
-                        }"
-                    >
-                        <a-button type="primary" @click="submit">
-                            登录
-                        </a-button>
-                        <a-button style="margin-left: 10px" @click="resetForm">
-                            清除
-                        </a-button>
-                        <span class="toRes" @click="register"
-                            >没有账号点我注册</span
-                        >
-                    </a-form-item>
-                </a-form>
-            </a-spin>
-        </div>
+  <div style="padding-top: 100px">
+    <div class="main">
+      <a-spin
+        size="large"
+        tip="登陆中"
+        :spinning="spinning"
+      >
+        <p class="text">
+          后台登录系统
+        </p>
+        <a-form
+          ref="formRef"
+          :model="formState"
+          :wrapper-col="wrapperCol"
+          :label-col="labelCol"
+        >
+          <a-form-item label="账号" name="name" :rules="rules.name">
+            <a-input v-model:value="formState.name" @keyup.enter="submit" />
+          </a-form-item>
+          <a-form-item label="密码" name="password" :rules="rules.password">
+            <a-input v-model:value="formState.password" type="password" @keyup.enter="submit" />
+          </a-form-item>
+          <a-form-item :wrapper-col="{span: 24,offset: 4,}">
+            <a-button type="primary" @click="submit" >
+              登录
+            </a-button>
+            <a-button style="margin-left: 10px" @click="resetForm">
+              清除
+            </a-button>
+            <span class="toRes" @click="register">没有账号点我注册</span>
+          </a-form-item>
+        </a-form>
+      </a-spin>
     </div>
+  </div>
 </template>
 
 <style lang="scss" scoped>

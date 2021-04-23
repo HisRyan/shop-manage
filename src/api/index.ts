@@ -1,16 +1,13 @@
-import axios from "axios";
-export function fetch(url:string, params = {}) {
-  return new Promise((resolve, reject) => {
-    axios
-      .get(url, {
-        params: params,
-        headers: {"Content-Type": "application/x-www-form-urlencoded"},
-      })
-      .then(response => {
-        resolve(response.data);
-      })
-      .catch(err => {
-        reject(err);
-      });
-  });
-}
+
+import  { Request ,baseUrl}   from '@/service'
+
+const request =Request.getInstance()
+
+
+// 用户登录
+export const userLogin = (params) => request.post(`/platform/v1/plt/oauth/login`,params )
+
+export {
+  applyList
+} from  './form'
+

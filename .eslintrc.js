@@ -13,6 +13,10 @@ module.exports = {
     '@typescript-eslint/ban-ts-ignore': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     "vue/no-unused-components": "off",
-    "eslint-disable-next-line": "off"
+    "eslint-disable-next-line": "off",
+    "max-len" :["error",{code:300}],
+    'vue/max-attributes-per-line': ['error', {
+      'singleline': 3,
+    }],
   },
 }

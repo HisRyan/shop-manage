@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw ,createWebHashHistory, Router } from 'vue-router'
 
 const routes: Array<any> = [
   {
@@ -55,10 +55,12 @@ const routes: Array<any> = [
     ]
   }
 ]
-const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+const router:Router = createRouter({
+  history: createWebHistory('/pc'),
   routes
 })
+
+
 
 router.beforeEach((to, from, next) => {
   next()

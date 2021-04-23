@@ -4,6 +4,7 @@ import { useRouter, useRoute, RouteLocationMatched } from "vue-router";
 import { CloseOutlined } from "@ant-design/icons-vue";
 import { Breadcrumb, Button } from "ant-design-vue";
 import { remove } from "../../utils";
+
 const crumbs = defineComponent({
   name: "Crumbs",
   components: {
@@ -63,7 +64,7 @@ export default crumbs;
   <div class="bread">
     <template v-for="(item, index) of breadcrumbs" :key="index">
       <div
-        style="margin-left: 10px"
+        style="margin-right: 10px"
         class="btn"
         :class="String(item.path) === String(route.path) ? 'route-crumbs' : 'crumbs'"
         @click="breadcrumbRedirect(item)"
@@ -99,7 +100,6 @@ export default crumbs;
     border-radius: 5px;
     font-size: 13px;
     cursor: pointer;
-    box-shadow: 4px #888888;
   }
   .crumbs {
     &:hover {

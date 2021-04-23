@@ -48,7 +48,7 @@ const MenuSider = defineComponent({
         title: "富文本",
         icon: "EditOutlined",
         children: [
-          {  
+          {
               key: "edit",
               title:"富文本编辑器",
               icon:'FormOutlined'
@@ -68,6 +68,8 @@ const MenuSider = defineComponent({
         ],
       },
     ];
+
+    const newMenuList = localStorage.getItem("menuList")
     const toMenu = (e: itemEvent) => {
       console.log(e.key);
       router.push({
@@ -79,6 +81,7 @@ const MenuSider = defineComponent({
       selectedKeys: ref<string[]>(["1"]),
       menuList,
       toMenu,
+      newMenuList
     };
   },
 });
@@ -113,7 +116,7 @@ export default MenuSider;
               </span>
             </template>
             <div
-              v-for="itemto in item.children"     
+              v-for="itemto in item.children"
               :key="itemto.key"
             >
               <a-menu-item :key="itemto.key">
