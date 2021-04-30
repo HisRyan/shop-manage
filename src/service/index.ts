@@ -54,6 +54,9 @@ export  class Request {
   protected responseInterceptors(): void {
     this.service.interceptors.response.use(
       (response: AxiosResponse) => {
+        if (response.config.url.includes('up-z2.qiniup.com')) {
+          return response.data
+        }
         //请求正常
         if(successCode.indexOf(response.status) != -1) {
           //接口返回200

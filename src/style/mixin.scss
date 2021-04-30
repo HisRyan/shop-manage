@@ -1,0 +1,34 @@
+
+//常用css
+
+//字体大小颜色设置
+@mixin fSizeColor ($size, $color, $family: 'PingFangSC-Regular') {
+  font-size: $size;
+  color: $color;
+  font-family: $family;
+}
+
+//宽高
+@mixin wh($width, $height) {
+  width: $width;
+  height: $height
+}
+
+//
+
+// flex布局和子元素在主轴和交叉轴对齐方式
+@mixin flexDisplay($justify: flex-start, $align: flex-start, $direction: row) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+}
+
+//相对定位
+@mixin absolute($top,$right,$bottom,$left) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}

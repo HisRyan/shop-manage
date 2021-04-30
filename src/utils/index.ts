@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 // base64加密
 export function $base64(t: string): void {
   return require("js-base64").Base64.encode(t);
@@ -22,3 +23,15 @@ export function remove(arr: Array<any>,val:any) {
 }
 export const ad = 1
 
+export function formatTime(date: string | Date | number, format?: string) {
+  const baseFormat = 'YYYY-MM-DD HH:mm:ss'
+  if (!date) return ''
+  return dayjs(date).format(format || baseFormat)
+}
+
+export function guid() {
+  function S4() {
+    return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+  }
+  return (S4() + S4() + S4() + S4() + S4() + S4() + S4() + S4());
+}

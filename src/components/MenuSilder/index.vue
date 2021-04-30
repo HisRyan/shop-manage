@@ -71,7 +71,6 @@ const MenuSider = defineComponent({
 
     const newMenuList = localStorage.getItem("menuList")
     const toMenu = (e: itemEvent) => {
-      console.log(e.key);
       router.push({
         name: e.key,
       });

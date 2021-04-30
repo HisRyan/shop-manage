@@ -68,7 +68,7 @@ export default home;
       <layout-header
         :style="{
           position: 'fixed',
-          zIndex: 1,
+          zIndex: 99,
           width: '100%',
           height: '70px',
           color: 'white',

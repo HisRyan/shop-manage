@@ -1,13 +1,16 @@
 <script lang="ts">
-import { defineComponent} from 'vue'
-import Upload from '@/components/Upload/index.vue'
+import { defineComponent, onMounted } from 'vue'
+import UpLoad from '@/components/Upload/index.vue'
 const upload = defineComponent({
     components: {
-      Upload
+      UpLoad
     },
     setup() {
-
+      const Sava = (res) =>{
+        console.log(res)
+      }
         return {
+          Sava
         }
     },
 })
@@ -17,10 +20,8 @@ export default upload
 
 <template>
   <div>
-  <!--上传一张照片-->
     <div class="upload_text">
-      <Upload></Upload>
-
+      <UpLoad @uploadSuccess="Sava"></UpLoad>
     </div>
   </div>
 </template>

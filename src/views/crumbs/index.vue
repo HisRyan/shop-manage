@@ -82,15 +82,15 @@ export default crumbs;
   </div>
   <div class="content">
     <router-view v-slot="{ Component }">
-        <transition name="fade-transform" mode="out-in">
-          <component :is="Component" />
-        </transition>
-      </router-view>
+      <transition name="fade-transform" mode="out-in">
+        <component :is="Component" />
+      </transition>
+    </router-view>
   </div>
 </template>
 
 <style lang="scss" >
-@import  '../../style/transtion';
+@import  'src/style/transtion';
 .bread {
   display: flex;
   .btn {

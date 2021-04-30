@@ -1,6 +1,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, toRefs } from 'vue'
 import { qrcanvas } from 'qrcanvas'
+
 const QRCode = defineComponent({
   props :{
     options:{
