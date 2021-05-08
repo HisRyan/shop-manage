@@ -8,6 +8,7 @@ const successCode = [HTTP_STATUS.ACCEPTED, HTTP_STATUS.CREATED, HTTP_STATUS.SUCC
 
 const serverErrorCode = [HTTP_STATUS.BAD_REQUEST]
 
+import { message } from 'ant-design-vue'
 
 
 
@@ -54,7 +55,9 @@ export  class Request {
   protected responseInterceptors(): void {
     this.service.interceptors.response.use(
       (response: AxiosResponse) => {
+        //七牛上传
         if (response.config.url.includes('up-z2.qiniup.com')) {
+          console.log(response.data.code);
           return response.data
         }
         //请求正常
@@ -68,7 +71,8 @@ export  class Request {
 
       },
       (error: AxiosError) => {
-        return Promise.reject('网络错误')
+        message.error('网络错误')
+        return Promise.reject(error)
       }
 
     )

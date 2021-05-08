@@ -55,6 +55,7 @@ const form = defineComponent({
        console.log(apply.value)
      }
      const validateName =  (rule, value: string) => {
+       console.log(rule.name)
        const r = /^\+?[1-9][0-9]*$/
        if(rule.name === '姓名') {
          if(r.test(value)) {
@@ -164,6 +165,7 @@ export default form
                     :image-height="80"
                     :image-width="80"
                     @upload-success="sava($event,item.attributeName,idx)"
+                    :max-number="4"
                   />
                 </div>
               </div>

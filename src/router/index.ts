@@ -23,7 +23,7 @@ const routes: Array<any> = [
       name: '主页',
       breadcrumb: true
     },
-    component: () => import('../views/home/index.vue'),
+    component: () => import('../views/index.vue'),
     children: [
       {
         path: '/home/edit',

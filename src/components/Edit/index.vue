@@ -163,7 +163,7 @@ export default {
     //清空编辑器内容
     empty() {
       this.editor.setContent('')
-    }
+    },
   },
 }
 </script>

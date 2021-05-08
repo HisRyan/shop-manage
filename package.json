@@ -16,6 +16,7 @@
     "core-js": "^3.6.5",
     "dayjs": "^1.10.4",
     "echarts": "^5.1.0",
+    "html2canvas": "*",
     "js-base64": "^3.6.0",
     "less": "^3.11.1",
     "less-loader": "^7.1.0",
