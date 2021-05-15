@@ -10,15 +10,14 @@ if(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile
 {
     // alert('这是手机')
 }
-const ua =String( window.navigator.userAgent.toLowerCase());
 //判断是否是微信浏览器
 if(navigator.userAgent.match(/MicroMessenger/i) ){
     // alert('是微信浏览器')
 } else{
     // alert('不是微信浏览器')
 }
-createApp(App).use(store).use(router).mount('#app')
-
+const app = createApp(App)
+app.use(store).use(router).mount('#app')
 
 
 

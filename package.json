@@ -5,7 +5,7 @@
   "scripts": {
     "serve:local": "vue-cli-service serve --mode server.local",
     "serve:pro": "vue-cli-service serve --mode server.pro",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --report",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
@@ -30,6 +30,7 @@
     "sass-loader": "^7.3.1",
     "tinymce": "^5.7.1",
     "vue": "^3.0.0",
+    "vue-easytable": "^2.5.1",
     "vue-router": "^4.0.0-0",
     "vue2-verify": "^1.1.5",
     "vuex": "^4.0.0-0"

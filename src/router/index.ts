@@ -52,6 +52,15 @@ const routes: Array<any> = [
         },
         component: () => import('../views/upload/index.vue')
       },
+      {
+        path: '/home/table',
+        name: 'table',
+        meta: {
+          name: '自定义表格',
+          breadcrumb: true
+        },
+        component: () => import('../views/table/index.vue')
+      },
     ]
   }
 ]

@@ -8,7 +8,9 @@ import {
   ProjectOutlined,
   CloudUploadOutlined,
   UploadOutlined,
-  FormOutlined
+  FormOutlined,
+  StarOutlined,
+  InsertRowBelowOutlined
 } from "@ant-design/icons-vue";
 interface itemEvent {
   key: string;
@@ -26,7 +28,9 @@ const MenuSider = defineComponent({
     ProjectOutlined,
     CloudUploadOutlined,
     UploadOutlined,
-    FormOutlined
+    FormOutlined,
+    StarOutlined,
+    InsertRowBelowOutlined
   },
   setup() {
     const router = useRouter();
@@ -67,9 +71,20 @@ const MenuSider = defineComponent({
           },
         ],
       },
+      {
+        key: 4,
+        title: "自定义",
+        icon: "StarOutlined",
+        children: [
+          {
+            key: "table",
+            title: "自定义表格",
+            icon: "InsertRowBelowOutlined",
+          },
+        ],
+      },
     ];
 
-    const newMenuList = localStorage.getItem("menuList")
     const toMenu = (e: itemEvent) => {
       router.push({
         name: e.key,
@@ -80,7 +95,6 @@ const MenuSider = defineComponent({
       selectedKeys: ref<string[]>(["1"]),
       menuList,
       toMenu,
-      newMenuList
     };
   },
 });

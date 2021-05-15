@@ -14,6 +14,9 @@ import { message } from 'ant-design-vue'
 
 import qs from 'qs'
 
+export const formType = {
+  'content-type': 'application/x-www-form-urlencoded'
+}
 
 export  class Request {
   //唯一实例
@@ -53,6 +56,7 @@ export  class Request {
 
   // 响应拦截
   protected responseInterceptors(): void {
+    console.log( process.env)
     this.service.interceptors.response.use(
       (response: AxiosResponse) => {
         //七牛上传
