@@ -6,7 +6,7 @@ const QRCode = defineComponent({
   props :{
     options:{
       required:true,
-      type:Object,
+      type: ,
     }
   },
   setup(props) {

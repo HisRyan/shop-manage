@@ -1,9 +1,11 @@
+
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
 import { Layout, Menu, Dropdown} from "ant-design-vue";
 import MenuSlier from '@/components/MenuSilder/index.vue';
 import { DownOutlined, LoginOutlined, UserOutlined } from "@ant-design/icons-vue";
+import * as echarts from 'echarts'
 import Breadcrumb from "../crumbs/index.vue"
 const LayoutContent = Layout.Content;
 const LayoutHeader = Layout.Header;

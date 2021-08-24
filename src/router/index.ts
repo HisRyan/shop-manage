@@ -8,7 +8,7 @@ const routes: Array<any> = [
   {
     path: '/signup',
     name: 'signup',
-    component: () => import('../views/signup/index.vue')
+    component: () => import('@/views/signup/index.vue')
   },
   {
     path: '/register',
@@ -18,7 +18,7 @@ const routes: Array<any> = [
   {
     path: '/home',
     name: 'home',
-    redirect: '/home/form',
+    redirect: '/home/edit',
     meta: {
       name: '主页',
       breadcrumb: true
@@ -60,6 +60,15 @@ const routes: Array<any> = [
           breadcrumb: true
         },
         component: () => import('../views/table/index.vue')
+      },
+      {
+        path: '/home/receive',
+        name: 'receive',
+        meta: {
+          name: '领物预约',
+          breadcrumb: true
+        },
+        component: () => import('../views/appointment/package/index.vue')
       },
     ]
   }

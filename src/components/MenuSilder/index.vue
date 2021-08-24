@@ -1,7 +1,8 @@
 <script lang="ts">
-import { defineComponent, ref, VNodeChild } from "vue";
+import { defineComponent, ref, VNodeChild, watch } from "vue";
 import { Menu } from "ant-design-vue";
-import { useRouter } from "vue-router";
+import { endArray } from '@/utils'
+import { useRoute, useRouter } from "vue-router";
 import {
   EditOutlined,
   ContainerOutlined,
@@ -10,7 +11,9 @@ import {
   UploadOutlined,
   FormOutlined,
   StarOutlined,
-  InsertRowBelowOutlined
+  InsertRowBelowOutlined,
+  DashboardOutlined,
+  AlertOutlined
 } from "@ant-design/icons-vue";
 interface itemEvent {
   key: string;
@@ -30,25 +33,27 @@ const MenuSider = defineComponent({
     UploadOutlined,
     FormOutlined,
     StarOutlined,
-    InsertRowBelowOutlined
+    InsertRowBelowOutlined,
+    DashboardOutlined,
+    AlertOutlined
   },
   setup() {
     const router = useRouter();
     const menuList: Array<any> = [
+      // {
+      //   key: 1,
+      //   title: "提交表单",
+      //   icon: "ContainerOutlined",
+      //   children: [
+      //     {
+      //       key: "form",
+      //       title: "自定义表单",
+      //       icon: "ProjectOutlined",
+      //     },
+      //   ],
+      // },
       {
-        key: 1,
-        title: "提交表单",
-        icon: "ContainerOutlined",
-        children: [
-          {
-            key: "form",
-            title: "自定义表单",
-            icon: "ProjectOutlined",
-          },
-        ],
-      },
-      {
-        key: "2",
+        key: "edit",
         title: "富文本",
         icon: "EditOutlined",
         children: [
@@ -60,7 +65,7 @@ const MenuSider = defineComponent({
         ]
       },
       {
-        key: 3,
+        key: "upload",
         title: "上传文件",
         icon: "CloudUploadOutlined",
         children: [
@@ -72,7 +77,7 @@ const MenuSider = defineComponent({
         ],
       },
       {
-        key: 4,
+        key: "table",
         title: "自定义",
         icon: "StarOutlined",
         children: [
@@ -83,8 +88,36 @@ const MenuSider = defineComponent({
           },
         ],
       },
+      {
+        key: "receive",
+        title: "预约系统",
+        icon: "DashboardOutlined",
+        children: [
+          {
+            key: "receive",
+            title: "预约领物",
+            icon: "AlertOutlined",
+          },
+        ],
+      },
     ];
+    const route = useRoute();
+    const selectedKeys = ref([])
+    const openKeys = ref([])
+    watch(
+        () => route.matched,
+        () => {
+          const routeName = route.matched[route.matched.length-1].name
+          selectedKeys.value = [routeName]
+          if(!openKeys.value.includes(routeName)) {
+            openKeys.value.push(routeName)
+          }
 
+        },
+        {
+          immediate: true,
+        }
+    );
     const toMenu = (e: itemEvent) => {
       router.push({
         name: e.key,
@@ -92,9 +125,11 @@ const MenuSider = defineComponent({
     };
 
     return {
-      selectedKeys: ref<string[]>(["1"]),
+      selectedKeys,
       menuList,
       toMenu,
+      endArray,
+      openKeys
     };
   },
 });
@@ -106,6 +141,7 @@ export default MenuSider;
   <div>
     <a-menu
       v-model:selectedKeys="selectedKeys"
+      v-model:openKeys="openKeys"
       theme="light"
       mode="inline"
       @click="toMenu"

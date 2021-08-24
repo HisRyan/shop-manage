@@ -73,3 +73,8 @@ export interface ApplyMessage {
   //报名项配置列表
   itemConfigClazzList: Array<allocationList>
 }
+
+export interface GroupList {
+  name: String,
+  id: number
+}

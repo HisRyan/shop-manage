@@ -1,11 +1,12 @@
 <script lang="ts">
-import { defineComponent, ref, UnwrapRef, reactive } from 'vue'
+import { defineComponent, ref, UnwrapRef, reactive, watchEffect, onMounted , getCurrentInstance, } from 'vue'
 import { Input, Form, Button, Spin, message } from 'ant-design-vue'
 import { useRouter } from 'vue-router'
 import { RuleObject } from 'node_modules/ant-design-vue/lib/form/interface'
 import {  userLogin, applyList } from "../../api"
 import {$base64} from "@/utils";
-
+import china  from '../../assets/china.json';
+import myButton from "@/components/personView/button/button.vue"
 
 interface FormState {
     name: string | null
@@ -18,16 +19,29 @@ const signup = defineComponent({
         'a-form': Form,
         'a-button': Button,
         'a-spin': Spin,
+         myButton
     },
     setup() {
         const formRef = ref()
+        const chart = ref(null);
+        let { proxy } = getCurrentInstance();
         const voiceText = ref<string>('')
+        const number = ref(1)
         const router = useRouter()
         const spinning = ref<Boolean>(false)
         const formState: UnwrapRef<FormState> = reactive({
             name: null,
             password: null,
         })
+      onMounted(() => {
+
+      });
+        watchEffect(() =>  {
+          console.log(number.value)
+        })
+        function clickNumber() {
+          number.value ++
+        }
         //登录按钮
         const submit = function() {
             formRef.value
@@ -113,6 +127,7 @@ const signup = defineComponent({
             resetForm,
             register,
             spinning,
+            clickNumber,
         }
     },
 })
@@ -144,7 +159,7 @@ export default signup
             <a-input v-model:value="formState.password" type="password" @keyup.enter="submit" />
           </a-form-item>
           <a-form-item :wrapper-col="{span: 24,offset: 4,}">
-            <a-button type="primary" @click="submit" >
+            <a-button type="primary" @click="submit">
               登录
             </a-button>
             <a-button style="margin-left: 10px" @click="resetForm">
@@ -155,9 +170,21 @@ export default signup
         </a-form>
       </a-spin>
     </div>
+    <div class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
+      <my-button type="success" @click="clickNumber">
+        确定
+      </my-button>
+      <a-button @click="clickNumber">
+        数字
+      </a-button>
+    </div>
+    <h1 class="pri-color md:text-color">
+      dawd1
+    </h1>
+    <div class="h-24 bg-gradient-to-r from-red-500" />
   </div>
+  <div id="myMap" ref="myMap" class="border"></div>
 </template>
-
 <style lang="scss" scoped>
 .main {
     width: 500px;

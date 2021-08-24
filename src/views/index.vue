@@ -1,8 +1,9 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import Home from '@/views/home/index.vue'
 import { ConfigProvider } from 'ant-design-vue'
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
+import { GroupList } from "@/interface/index"
 
 const index = defineComponent({
   components :{
@@ -10,6 +11,7 @@ const index = defineComponent({
     'a-config-provider':ConfigProvider
   },
   setup() {
+
     return {
       locale: zhCN,
     }

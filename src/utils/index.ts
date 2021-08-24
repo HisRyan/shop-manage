@@ -40,4 +40,8 @@ export function guid() {
   return (S4() + S4() + S4() + S4() + S4() + S4() + S4() + S4());
 }
 
-
+// 返回数组最后一项
+export function endArray(arr) {
+   const end = arr.pop()
+   return end
+}

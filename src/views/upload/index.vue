@@ -1,11 +1,13 @@
 <script lang="ts">
-import { defineComponent, CSSProperties, ref } from 'vue'
+import { GroupList } from "@/interface";
+import { defineComponent, CSSProperties, ref, computed, onMounted, Ref} from 'vue'
 import UpLoad from '@/components/Upload/index.vue'
 import html2canvas from 'html2canvas';
 import { Moment } from 'moment';
-import { Button, message, DatePicker, Input } from 'ant-design-vue'
+import { Button, message, DatePicker, Input, Cascader } from 'ant-design-vue'
 import  { SmileOutlined } from '@ant-design/icons-vue'
-
+import city from "@/assets/js/city.js"
+import time from "@/assets/js/time.js"
 enum nameDraw {
   success,
   fail,
@@ -24,26 +26,41 @@ const upload = defineComponent({
       message,
       'a-data-picker':DatePicker,
       SmileOutlined,
-      'a-textarea':Input.TextArea
+      'a-textarea':Input.TextArea,
+      'a-cascader': Cascader
     },
     setup() {
       const Sava = (res) =>{
         console.log(res)
       }
+      const Demo = ref("111")
+      const list: GroupList[] = [
+        { name:'ad', id: 1 }
+      ]
+      const list2 = ref<GroupList[]>([{name:"tom", id: 2}])
+      const add = <T> (number: Array<T>): Array<T> => {
+        return  number
+      }
+
+      const list3: [number, string] = [1,'2']
+      onMounted(() => {
+        add([1,3,4])
+      })
       const src = ref('')
       const imageHtml = () => {
-        html2canvas(document.body, {
-          backgroundColor: '#ffffff',
-          width:500,
-          height:600
-        }).then(canvas => {
-          const imgData = canvas.toDataURL("image/png");
-          console.log(imgData)
-          src.value = imgData
-          fileDownload(imgData);
-          message.success('导出成功')
-
-        })
+        // html2canvas(document.body, {
+        //   backgroundColor: '#ffffff',
+        //   width:500,
+        //   height:600
+        // }).then(canvas => {
+        //   const imgData = canvas.toDataURL("image/png");
+        //   console.log(imgData)
+        //   src.value = imgData
+        //   fileDownload(imgData);
+        //   message.success('导出成功')
+        //
+        // })
+        window.open('https://www.huya.com/','_black')
       }
       const fileDownload =(downloadUrl) => {
         let aLink = document.createElement("a");
@@ -55,6 +72,7 @@ const upload = defineComponent({
         aLink.click();
         document.body.removeChild(aLink);
       }
+
       const getCurrentStyle = (current: Moment) => {
         const style: CSSProperties = {};
 
@@ -69,7 +87,11 @@ const upload = defineComponent({
           imageHtml,
           getCurrentStyle,
           nameDrawMap,
-          src
+          src,
+          add,
+          value: ref<string[]>([]),
+          city,
+          time,
         }
     },
 })
@@ -81,17 +103,22 @@ export default upload
   <div>
     <div class="upload_text">
       <UpLoad @uploadSuccess="Sava" />
-      <Button style="margin: 30px" @click="imageHtml">
+      <Button
+        style="margin: 30px"
+        type="danger"
+        @click="imageHtml"
+      >
         导出当前界面
       </Button>
       <img :src="src">
       <div>
-        <a-data-picker  placeholder='请选择开始日期'>
+        <a-data-picker placeholder="请选择开始日期">
           <template #suffixIcon>
             <SmileOutlined />
           </template>
         </a-data-picker>
       </div>
     </div>
+    <a-cascader v-model:value="value" :options="time" placeholder="Please select" />
   </div>
 </template>
